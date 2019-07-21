@@ -1,5 +1,41 @@
-# Intro to Sql
+# Intro to SQL and Postgres
+- Installing postgres on Mac
+    - Download (postgresapp)[https://postgresapp.com/]
+    - Move postgresapp to Applications folder
+    - add path to bash profile
+        ```
+        open ~/.bash_profile
+        ```
+        - add the line below
+        ```
+        export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/11/bin
+        ```
+        ```
+        source ~/.bash_profile
+        psql
+        ```
 
+- Useful psql commands
+    - view all databases
+    ```
+    \l;
+    ```
+    - connect to database 
+    ```
+    \c database_name;
+    ```
+    - exiting psql
+    ```
+    \q;
+    ```
+    - viewing all tables in a database;
+    ```
+    \d+;
+    ```
+    - viewing detailed info on a table
+    ```
+    \d+ table_name;
+    ```
 - let's start why creating a database named learning_database
 ```
 CREATE DATABASE learning_database;
@@ -21,20 +57,21 @@ CREATE TABLE users (
 CREATE TABLE pictures (
     id SERIAL PRIMARY KEY,
     url VARCHAR NOT NULL,
-    user_id INT NOT NULL
+    user_id INT FOREIGN KEY REFERENCES learning_database.users(id)
 );
 ```
 
 - Insert rows of data into users table
+    - Note: use single quotes in any string values, otherwise postgres will think they are column names
 ```
-INSERT INTO TABLE users(name, address, email, age) VALUES("Stephanie", "1234 st El Paso TX", "stephanie@gmail.com", 20); -- will have id 1
-INSERT INTO TABLE users(name, address, email, age) VALUES("Tanya", "1234 st El Paso TX", "tanya@gmail.com", 22); -- will have id 2
+INSERT INTO users(name, address, email, age) VALUES('Stephanie', '1234 st El Paso TX', 'stephanie@gmail.com', 20); -- will have id 1
+INSERT INTO users(name, address, email, age) VALUES('Tanya', '1234 st El Paso TX', 'tanya@gmail.com', 22); -- will have id 2
 ```
 
 - Insert rows of data into pictures table
 ```
-INSERT INTO TABLE pictures(url, user_id) VALUES('fake_url', 1); -- this picture belongs to Stephanie (ID 1)
-INSERT INTO TABLE pictures(url, user_id) VALUES('fake_url_2', 2); -- this picture belong to Tanya (ID 2)
+INSERT INTO pictures(url, user_id) VALUES('fake_url', 1); -- this picture belongs to Stephanie (ID 1)
+INSERT INTO pictures(url, user_id) VALUES('fake_url_2', 2); -- this picture belong to Tanya (ID 2)
 ```
 
 - Viewing data. We can select from 1 to all colums in a table to view
@@ -72,16 +109,68 @@ DROP TABLE users;
 ```
 
 - we can also delete certain rows in a table 
+```
+DELETE FROM users WHERE name='Stephanie'
+```
+
+- modify rows in a database
+```
+
+```
 
 
-- Kinds of relations between tables
+- Kinds of relations between tables (checkout pdf for visualization of these relations)
     - One to Many
         - a row in a table can be associated to many rows in a second table
         - considering our current example, a user can have many pictures, but a single picture cannot have many users.
+        ```
+        CREATE TABLE users (
+            id SERIAL PRIMARY KEY, 
+            name VARCHAR NOT NULL,
+            address VARCHAR NOT NULL,
+            email VARCHAR NOT NULL,
+            age INT 
+        );
+        CREATE TABLE pictures (
+            id SERIAL PRIMARY KEY,
+            url VARCHAR NOT NULL,
+            user_id INT FOREIGN KEY REFERENCES learning_database.users(id)
+        );
+        ```
     - One to One
         - Let's alter our example. Let's say our pictures table is actually a table of profile pictures. A user can only have one profile picture, and one profile picture can only have one user. 
+        ```
+        ```
+        CREATE TABLE users (
+            id SERIAL PRIMARY KEY, 
+            name VARCHAR NOT NULL,
+            address VARCHAR NOT NULL,
+            email VARCHAR NOT NULL,
+            age INT 
+        );
+        CREATE TABLE pictures (
+            id SERIAL PRIMARY KEY,
+            url VARCHAR NOT NULL,
+            user_id INT UNIQUE FOREIGN KEY REFERENCES learning_database.users(id)
+        );
+        ```
     - Many to Many
         - Let's alter our example again. Let's assume that these are now pictures on facebook that have users tagged. A user can have many pictures they are tagged in, and a picture can have many tagged users. 
+        ```
+        CREATE TABLE users (
+            id SERIAL PRIMARY KEY, 
+            name VARCHAR NOT NULL,
+            address VARCHAR NOT NULL,
+            email VARCHAR NOT NULL,
+            age INT 
+            picutre_id INT NOT NULL
+        );
+        CREATE TABLE pictures (
+            id SERIAL PRIMARY KEY,
+            url VARCHAR NOT NULL,
+            user_id INT NOT NULL
+        );
+        ```
 
 
 
