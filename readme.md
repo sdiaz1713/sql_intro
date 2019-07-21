@@ -113,9 +113,9 @@ DROP TABLE users;
 DELETE FROM users WHERE name='Stephanie'
 ```
 
-- modify rows in a database
+- modify rows in a database using UPDATE
 ```
-
+UPDATE users SET email='stephanie_diaz@gmail.com' WHERE name='Stephanie';
 ```
 
 
