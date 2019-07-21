@@ -172,6 +172,15 @@ DELETE FROM users WHERE name='Stephanie'
         );
         ```
 
+## Deliverables
+- create a database
+- create a system of tables in the database that includes all relationships
+- write the following queries
+    - insert data rows into all tables (a separate query for each table)
+    - a query that deletes a specific row in any table based on a critera (you can decide on this criteria)
+    - a query that modifies a row in any table
+    - a query that finds a row based on a foreign key for each of the relations
+    - a query that returns the columns of a table aliased (you can chose the aliases)
 
 
 
