@@ -58,7 +58,8 @@ CREATE TABLE Users (
 CREATE TABLE Pictures (
     id SERIAL PRIMARY KEY,
     url VARCHAR NOT NULL,
-    user_id INT FOREIGN KEY REFERENCES learning_database.users(id)
+    user_id INT NOT NULL, 
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 ```
 
@@ -135,7 +136,8 @@ UPDATE Users SET email='stephanie_diaz@gmail.com' WHERE name='Stephanie';
         CREATE TABLE Pictures (
             id SERIAL PRIMARY KEY,
             url VARCHAR NOT NULL,
-            user_id INT FOREIGN KEY REFERENCES learning_database.users(id)
+            user_id INT NOT NULL, 
+            FOREIGN KEY (user_id) REFERENCES Users(id)
         );
         ```
     - One to One
@@ -152,7 +154,8 @@ UPDATE Users SET email='stephanie_diaz@gmail.com' WHERE name='Stephanie';
         CREATE TABLE Pictures (
             id SERIAL PRIMARY KEY,
             url VARCHAR NOT NULL,
-            user_id INT UNIQUE FOREIGN KEY REFERENCES learning_database.users(id)
+            user_id INT NOT NULL UNIQUE, 
+            FOREIGN KEY (user_id) REFERENCES Users(id)
         );
         ```
     - Many to Many
@@ -163,14 +166,17 @@ UPDATE Users SET email='stephanie_diaz@gmail.com' WHERE name='Stephanie';
             name VARCHAR NOT NULL,
             address VARCHAR NOT NULL,
             email VARCHAR NOT NULL,
-            age INT 
-            picutre_id INT NOT NULL
+            age INT,
+            picture_id INT NOT NULL
         );
         CREATE TABLE Pictures (
             id SERIAL PRIMARY KEY,
             url VARCHAR NOT NULL,
-            user_id INT NOT NULL
+            user_id INT NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES Users(id)
         );
+        ALTER TABLE Users
+        ADD CONSTRAINT picture_id FOREIGN KEY (picture_id) REFERENCES Pictures(id);
         ```
 
 ## Deliverables (write in deliverables.sql)
