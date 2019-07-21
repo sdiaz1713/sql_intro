@@ -172,7 +172,7 @@ DELETE FROM users WHERE name='Stephanie'
         );
         ```
 
-## Deliverables
+## Deliverables (write in deliverables.sql)
 - create a database
 - create a system of tables in the database that includes all relationships
 - write the following queries
