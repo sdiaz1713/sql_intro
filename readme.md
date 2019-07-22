@@ -1,6 +1,6 @@
 # Intro to SQL and Postgres
 - Installing postgres on Mac
-    - Download (postgresapp)[https://postgresapp.com/]
+    - Download [postgresapp](https://postgresapp.com/)
     - Move postgresapp to Applications folder
     - add path to bash profile
         ```
