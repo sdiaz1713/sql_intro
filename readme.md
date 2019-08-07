@@ -143,7 +143,6 @@ UPDATE Users SET email='stephanie_diaz@gmail.com' WHERE name='Stephanie';
     - One to One
         - Let's alter our example. Let's say our pictures table is actually a table of profile pictures. A user can only have one profile picture, and one profile picture can only have one user. 
         ```
-        ```
         CREATE TABLE Users (
             id SERIAL PRIMARY KEY, 
             name VARCHAR NOT NULL,
