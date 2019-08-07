@@ -50,7 +50,7 @@ INSERT INTO characteristics(person, characteristic, scale) VALUES('tanya', 'fash
 
 
 DELETE FROM zodiac WHERE element='fire';
-UPDATE family SET fname='spike' WHERE fname='doggo';
+UPDATE family SET fname='cosa' WHERE fname='doggo';
 SELECT * FROM family WHERE sunsign='scorpio';
 SELECT * FROM characteristics WHERE person='tanya';
 SELECT fname, sunsign AS zodiac FROM family;
