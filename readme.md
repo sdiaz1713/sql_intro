@@ -20,7 +20,7 @@
     ```
     \l
     ```
-    - connect to database 
+    - connect to database
     ```
     \c database_name
     ```
@@ -48,16 +48,16 @@ CREATE DATABASE learning_database;
         - A foreign key is used to make a row of data from one table to a row of data in another. The users table doesn't have a foreign key. However, the pictures table has foreign key 'user_id.' This foreign key is used to match a picture to a user in the users table. The user_id is matched to id in the users table.  
 ```
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY, 
+    id SERIAL PRIMARY KEY,
     name VARCHAR NOT NULL,
     address VARCHAR NOT NULL,
     email VARCHAR NOT NULL,
-    age INT 
+    age INT
 );
 CREATE TABLE pictures (
     id SERIAL PRIMARY KEY,
     url VARCHAR NOT NULL,
-    user_id INT NOT NULL, 
+    user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 ```
@@ -80,7 +80,7 @@ INSERT INTO pictures(url, user_id) VALUES('fake_url_2', 2); -- this picture belo
     ```
     SELECT * FROM users;
     ```
-    - select name and age columns. 
+    - select name and age columns.
     ```
     SELECT name, age FROM users;
     ```
@@ -109,7 +109,7 @@ TRUNCATE TABLE users;
 DROP TABLE users;
 ```
 
-- we can also delete certain rows in a table 
+- we can also delete certain rows in a table
 ```
 DELETE FROM users WHERE name='Stephanie'
 ```
@@ -127,33 +127,33 @@ UPDATE users SET email='stephanie_diaz@gmail.com' WHERE name='Stephanie';
         - considering our current example, a user can have many pictures, but a single picture cannot have many users.
         ```
         CREATE TABLE users (
-            id SERIAL PRIMARY KEY, 
+            id SERIAL PRIMARY KEY,
             name VARCHAR NOT NULL,
             address VARCHAR NOT NULL,
             email VARCHAR NOT NULL,
-            age INT 
+            age INT
         );
         CREATE TABLE pictures (
             id SERIAL PRIMARY KEY,
             url VARCHAR NOT NULL,
-            user_id INT NOT NULL, 
+            user_id INT NOT NULL,
             FOREIGN KEY (user_id) REFERENCES users(id)
         );
         ```
     - One to One
-        - Let's alter our example. Let's say our pictures table is actually a table of profile pictures. A user can only have one profile picture, and one profile picture can only have one user. 
+        - Let's alter our example. Let's say our pictures table is actually a table of profile pictures. A user can only have one profile picture, and one profile picture can only have one user.
         ```
         CREATE TABLE users (
-            id SERIAL PRIMARY KEY, 
+            id SERIAL PRIMARY KEY,
             name VARCHAR NOT NULL,
             address VARCHAR NOT NULL,
             email VARCHAR NOT NULL,
-            age INT 
+            age INT
         );
         CREATE TABLE pictures (
             id SERIAL PRIMARY KEY,
             url VARCHAR NOT NULL,
-            user_id INT NOT NULL UNIQUE, 
+            user_id INT NOT NULL UNIQUE,
             FOREIGN KEY (user_id) REFERENCES users(id)
         );
         ```
@@ -167,14 +167,3 @@ UPDATE users SET email='stephanie_diaz@gmail.com' WHERE name='Stephanie';
     - a query that modifies a row in any table
     - a query that finds a row based on a foreign key for each of the relations
     - a query that returns the columns of a table aliased (you can chose the aliases)
-
-
-
-
-
-
-
-
-
-
-
